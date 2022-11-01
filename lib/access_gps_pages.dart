@@ -1,18 +1,45 @@
 
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo3_maps/pages/home_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class AccessPage extends StatefulWidget {
-  const AccessPage({Key? key}) : super(key: key);
 
   @override
   _AccessPageState createState() => _AccessPageState();
 }
 
-class _AccessPageState extends State<AccessPage> {
+class _AccessPageState extends State<AccessPage> with WidgetsBindingObserver{
+
+  @override
+  void initState(){
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void dispose(){
+    // TODO: implement dispose
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async{
+    //TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+    if(state == AppLifecycleState.resumed){
+      if(await Permission.location.isGranted){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+      }
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

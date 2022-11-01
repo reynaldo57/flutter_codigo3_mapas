@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo3_maps/access_gps_pages.dart';
+import 'package:flutter_codigo3_maps/loading_page.dart';
 import 'package:flutter_codigo3_maps/pages/home_page.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AccessPage(),
+      home: LoadingPage(),
     );
   }
 }
