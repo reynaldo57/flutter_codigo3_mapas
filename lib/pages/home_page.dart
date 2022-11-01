@@ -62,50 +62,50 @@ class _HomePageState extends State<HomePage> {
               });
             },
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Container(
-                      height: 200,
-                      width: 200,
-                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black54.withOpacity(0.24),
-                              blurRadius: 12,
-                              offset: Offset(0,4)
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(24.0),
-                      ),
-                    ),
-                    Container(
-                      height: 200,
-                      width: 200,
-                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black54.withOpacity(0.24),
-                              blurRadius: 12,
-                              offset: Offset(0,4)
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(24.0),
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
-          )
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: [
+          //     SingleChildScrollView(
+          //       scrollDirection: Axis.horizontal,
+          //       child: Row(
+          //         children: [
+          //           Container(
+          //             height: 200,
+          //             width: 200,
+          //             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          //             decoration: BoxDecoration(
+          //               color: Colors.white,
+          //               boxShadow: [
+          //                 BoxShadow(
+          //                     color: Colors.black54.withOpacity(0.24),
+          //                     blurRadius: 12,
+          //                     offset: Offset(0,4)
+          //                 )
+          //               ],
+          //               borderRadius: BorderRadius.circular(24.0),
+          //             ),
+          //           ),
+          //           Container(
+          //             height: 200,
+          //             width: 200,
+          //             margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          //             decoration: BoxDecoration(
+          //               color: Colors.white,
+          //               boxShadow: [
+          //                 BoxShadow(
+          //                     color: Colors.black54.withOpacity(0.24),
+          //                     blurRadius: 12,
+          //                     offset: Offset(0,4)
+          //                 )
+          //               ],
+          //               borderRadius: BorderRadius.circular(24.0),
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     )
+          //   ],
+          // )
         ],
       )
     );
