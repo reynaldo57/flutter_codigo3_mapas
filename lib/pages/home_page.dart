@@ -34,6 +34,15 @@ class _HomePageState extends State<HomePage> {
 
   }
 
+  getCurrentPositionAndController(GoogleMapController controller){
+    Geolocator.getPositionStream().listen((Position position){
+      LatLng pos = LatLng(position.latitude, position.longitude);
+      CameraUpdate cameraUpdate = CameraUpdate.newLatLng(pos);
+      controller.animateCamera(cameraUpdate);
+      print("EVENT::: ${position}");
+    });
+  }
+
 
 
   @override
@@ -56,6 +65,7 @@ class _HomePageState extends State<HomePage> {
                 markers: _markers.values.toSet(),
                 onMapCreated: (GoogleMapController controller){
                   controller.setMapStyle(jsonEncode(mapStyle));
+                  getCurrentPositionAndController(controller);
                 },
                 onTap: (LatLng position) async{
                   final icon =
