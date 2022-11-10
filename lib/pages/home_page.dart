@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Map<MarkerId, Marker> _markers = {};
+  final Set<Polyline> _polylines = {};
+  List<LatLng> _points = [];
 
 
   @override
@@ -35,11 +37,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   getCurrentPositionAndController(GoogleMapController controller){
+
+    _polylines.add(
+      Polyline(
+        polylineId: PolylineId("Ruta Repartidor"),
+        points: _points,
+        color: Colors.deepPurpleAccent,
+        width: 7,
+      )
+    );
+
     Geolocator.getPositionStream().listen((Position position){
       LatLng pos = LatLng(position.latitude, position.longitude);
       CameraUpdate cameraUpdate = CameraUpdate.newLatLng(pos);
+      _points.add(pos);
       controller.animateCamera(cameraUpdate);
-      print("EVENT::: ${position}");
+      setState(() {
+
+      });
     });
   }
 
@@ -63,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                 zoomControlsEnabled: true,
                 mapType: MapType.normal,
                 markers: _markers.values.toSet(),
+                polylines: _polylines,
                 onMapCreated: (GoogleMapController controller){
                   controller.setMapStyle(jsonEncode(mapStyle));
                   getCurrentPositionAndController(controller);
