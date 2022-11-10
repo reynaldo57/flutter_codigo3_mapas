@@ -36,7 +36,12 @@ class _HomePageState extends State<HomePage> {
 
   }
 
-  getCurrentPositionAndController(GoogleMapController controller){
+  getCurrentPositionAndController(GoogleMapController controller) async{
+
+    final iconTruck = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), 'assets/images/truck.png');
+    final markerTruckId = MarkerId(_markers.length.toString());
+
+
 
     _polylines.add(
       Polyline(
@@ -52,6 +57,12 @@ class _HomePageState extends State<HomePage> {
       CameraUpdate cameraUpdate = CameraUpdate.newLatLng(pos);
       _points.add(pos);
       controller.animateCamera(cameraUpdate);
+      final markerTruck = Marker(
+          markerId: markerTruckId,
+          icon: iconTruck,
+          position: pos
+      );
+      _markers[markerTruckId] = markerTruck;
       setState(() {
 
       });
@@ -71,7 +82,7 @@ class _HomePageState extends State<HomePage> {
               CameraPosition cam = snap.data as CameraPosition;
               return GoogleMap(
                 initialCameraPosition: cam,
-                myLocationEnabled: true,
+                //myLocationEnabled: true,
                 myLocationButtonEnabled: true,
                 compassEnabled: true,
                 scrollGesturesEnabled: true,
