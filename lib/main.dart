@@ -6,8 +6,9 @@ import 'package:flutter_codigo3_maps/pages/home_page.dart';
 import 'package:flutter_codigo3_maps/pages/test_media_queries_page.dart';
 
 void main(){
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(MyApp()));
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(MyApp()));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

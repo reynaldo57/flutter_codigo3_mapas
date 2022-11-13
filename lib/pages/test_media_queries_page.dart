@@ -34,24 +34,32 @@ class TestMediaQueryPage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            color: Colors.deepPurpleAccent,
-            height: responsive.hp(60),
-            //width: _width * 0.8,
-            alignment: Alignment.center,
-            child: Text(
-              "Hola",
-              style: TextStyle(
-                fontSize: ResponsiveUI.of(context).hp(10),
-              ),
-            ),
-          ),
-          ElevatedButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> AccessPage()));
-          }, child: Text("Go")),
-        ],
+      // body: Column(
+      //   children: [
+      //     Container(
+      //       color: Colors.deepPurpleAccent,
+      //       height: responsive.hp(60),
+      //       //width: _width * 0.8,
+      //       alignment: Alignment.center,
+      //       child: Text(
+      //         "Hola",
+      //         style: TextStyle(
+      //           fontSize: ResponsiveUI.of(context).hp(10),
+      //         ),
+      //       ),
+      //     ),
+      //     ElevatedButton(onPressed: (){
+      //       Navigator.push(context, MaterialPageRoute(builder: (context)=> AccessPage()));
+      //     }, child: Text("Go")),
+      //   ],
+      // ),
+      body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation){
+          return GridView.count(
+            crossAxisCount: orientation == Orientation.landscape ? 3 :2,
+            children: List.generate(100, (index) => Center(child: Text("Item"),),),
+          );
+        },
       ),
     );
   }
