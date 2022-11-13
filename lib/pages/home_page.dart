@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late GoogleMapController googleMapController;
   Map<MarkerId, Marker> _markers = {};
   final Set<Polyline> _polylines = {};
   List<LatLng> _points = [];
@@ -35,6 +36,13 @@ class _HomePageState extends State<HomePage> {
     return _initialCameraPosition;
 
   }
+
+  void moveCamera() async{
+    Position currentPosition = await Geolocator.getCurrentPosition();
+    CameraUpdate cam = CameraUpdate.newLatLng(LatLng(currentPosition.latitude, currentPosition.longitude));
+    googleMapController.animateCamera(cam);
+  }
+
 
   getCurrentPositionAndController(GoogleMapController controller) async{
 
@@ -75,55 +83,76 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: FutureBuilder(
-          future: initCurrentPosition(),
-          builder: (context, snap){
-            if(snap.hasData){
-              CameraPosition cam = snap.data as CameraPosition;
-              return GoogleMap(
-                initialCameraPosition: cam,
-                //myLocationEnabled: true,
-                myLocationButtonEnabled: true,
-                compassEnabled: true,
-                scrollGesturesEnabled: true,
-                zoomControlsEnabled: true,
-                mapType: MapType.normal,
-                markers: _markers.values.toSet(),
-                polylines: _polylines,
-                onMapCreated: (GoogleMapController controller){
-                  controller.setMapStyle(jsonEncode(mapStyle));
-                  getCurrentPositionAndController(controller);
-                },
-                onTap: (LatLng position) async{
-                  final icon =
-                  await BitmapDescriptor.fromAssetImage(ImageConfiguration(), 'assets/images/policeman.png');
-                  final markerId = MarkerId(_markers.length.toString());
-                  final marker = Marker(
-                      markerId: markerId,
-                      position: position,
-                      //icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
-                      //icon: BitmapDescriptor.defaultMarkerWithHue(240),
-                      icon: icon,
-                      rotation: -10,
-                      anchor: Offset(0.5, 1),
-                      draggable: true,
-                      onDragEnd: (LatLng newPosition){
-                        print(newPosition);
-                      },
-                      onTap: (){
-                        print("llamar modal");
-                      }
+        child: Stack(
+          children: [
+            FutureBuilder(
+              future: initCurrentPosition(),
+              builder: (context, snap){
+                if(snap.hasData){
+                  CameraPosition cam = snap.data as CameraPosition;
+                  return GoogleMap(
+                    initialCameraPosition: cam,
+                    //myLocationEnabled: true,
+                    myLocationButtonEnabled: true,
+                    compassEnabled: true,
+                    scrollGesturesEnabled: true,
+                    zoomControlsEnabled: true,
+                    mapType: MapType.normal,
+                    markers: _markers.values.toSet(),
+                    polylines: _polylines,
+                    onMapCreated: (GoogleMapController controller){
+                      googleMapController = controller;
+                      googleMapController.setMapStyle(jsonEncode(mapStyle));
+                      getCurrentPositionAndController(googleMapController);
+                    },
+                    onTap: (LatLng position) async{
+                      final icon =
+                      await BitmapDescriptor.fromAssetImage(ImageConfiguration(), 'assets/images/policeman.png');
+                      final markerId = MarkerId(_markers.length.toString());
+                      final marker = Marker(
+                          markerId: markerId,
+                          position: position,
+                          //icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+                          //icon: BitmapDescriptor.defaultMarkerWithHue(240),
+                          icon: icon,
+                          rotation: -10,
+                          anchor: Offset(0.5, 1),
+                          draggable: true,
+                          onDragEnd: (LatLng newPosition){
+                            print(newPosition);
+                          },
+                          onTap: (){
+                            print("llamar modal");
+                          }
+                      );
+                      _markers[markerId] = marker;
+
+                      setState(() {
+
+                      });
+                    },
                   );
-                  _markers[markerId] = marker;
+                }
+                return Center(child: CircularProgressIndicator(),);
+              },
+            ),
+            GestureDetector(
+              onTap: () {
+                moveCamera();
+              },
+              child: Container(
+                height: 50,
+                width: 50,
+                margin: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.location_on, size: 30, color: Colors.black54,),
 
-                  setState(() {
-
-                  });
-                },
-              );
-            }
-            return Center(child: CircularProgressIndicator(),);
-          },
+              ),
+            ),
+          ],
         )
           // children: [
           //
