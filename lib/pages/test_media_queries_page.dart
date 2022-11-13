@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_codigo3_maps/pages/access_gps_pages.dart';
 import 'package:flutter_codigo3_maps/utils/responsive.dart';
 import 'dart:io' show Platform;
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -16,7 +17,7 @@ class TestMediaQueryPage extends StatelessWidget {
     // print(_width);
     // print(_height);
 
-    final ResponsiveUI responsive = ResponsiveUI.of(context)
+    final ResponsiveUI responsive = ResponsiveUI.of(context);
 
     Orientation _orientation = MediaQuery.of(context).orientation;
     print(_orientation);
@@ -46,7 +47,10 @@ class TestMediaQueryPage extends StatelessWidget {
                 fontSize: ResponsiveUI.of(context).hp(10),
               ),
             ),
-          )
+          ),
+          ElevatedButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> AccessPage()));
+          }, child: Text("Go")),
         ],
       ),
     );

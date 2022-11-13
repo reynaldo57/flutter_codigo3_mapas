@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_codigo3_maps/pages/home_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -17,6 +18,7 @@ class _AccessPageState extends State<AccessPage> with WidgetsBindingObserver{
   void initState(){
     // TODO: implement initState
     super.initState();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight]);
     WidgetsBinding.instance.removeObserver(this);
   }
 
@@ -24,6 +26,7 @@ class _AccessPageState extends State<AccessPage> with WidgetsBindingObserver{
   void dispose(){
     // TODO: implement dispose
     super.dispose();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     WidgetsBinding.instance.removeObserver(this);
   }
 
