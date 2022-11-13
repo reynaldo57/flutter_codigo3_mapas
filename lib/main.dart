@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_codigo3_maps/pages/access_gps_pages.dart';
 import 'package:flutter_codigo3_maps/pages/loading_page.dart';
 import 'package:flutter_codigo3_maps/pages/home_page.dart';
 import 'package:flutter_codigo3_maps/pages/test_media_queries_page.dart';
 
-void main() {
-  runApp(MyApp());
+void main(){
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {

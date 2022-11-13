@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_codigo3_maps/utils/responsive.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class TestMediaQueryPage extends StatelessWidget {
   const TestMediaQueryPage({Key? key}) : super(key: key);
@@ -14,7 +16,21 @@ class TestMediaQueryPage extends StatelessWidget {
     // print(_width);
     // print(_height);
 
-    final ResponsiveUI responsive = ResponsiveUI.of(context);
+    final ResponsiveUI responsive = ResponsiveUI.of(context)
+
+    Orientation _orientation = MediaQuery.of(context).orientation;
+    print(_orientation);
+
+
+    if(kIsWeb){
+      print("Se esta ejecutando en web");
+    }else {
+      print("Esta en otra plataforma");
+      if(Platform.isAndroid){
+        print("Android");
+      }else if(Platform.isIOS){
+      }
+    }
 
     return Scaffold(
       body: Column(
