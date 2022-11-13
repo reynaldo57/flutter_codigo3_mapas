@@ -1,0 +1,38 @@
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_codigo3_maps/utils/responsive.dart';
+
+class TestMediaQueryPage extends StatelessWidget {
+  const TestMediaQueryPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // double _width = MediaQuery.of(context).size.width;
+    // double _height = MediaQuery.of(context).size.height;
+    //
+    // print(_width);
+    // print(_height);
+
+    final ResponsiveUI responsive = ResponsiveUI.of(context);
+
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            color: Colors.deepPurpleAccent,
+            height: responsive.hp(60),
+            //width: _width * 0.8,
+            alignment: Alignment.center,
+            child: Text(
+              "Hola",
+              style: TextStyle(
+                fontSize: ResponsiveUI.of(context).hp(10),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

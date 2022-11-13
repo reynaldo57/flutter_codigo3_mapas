@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_codigo3_maps/access_gps_pages.dart';
-import 'package:flutter_codigo3_maps/loading_page.dart';
+import 'package:flutter_codigo3_maps/pages/access_gps_pages.dart';
+import 'package:flutter_codigo3_maps/pages/loading_page.dart';
 import 'package:flutter_codigo3_maps/pages/home_page.dart';
+import 'package:flutter_codigo3_maps/pages/test_media_queries_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoadingPage(),
+      home: TestMediaQueryPage(),
     );
   }
 }
